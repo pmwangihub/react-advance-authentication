@@ -1,0 +1,1 @@
+/home/user/django_cloud/frontend
