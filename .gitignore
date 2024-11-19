@@ -22,4 +22,4 @@ dist-ssr
 *.sln
 *.sw?
 *.pem
-*.env
+.env*
