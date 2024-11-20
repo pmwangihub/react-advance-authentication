@@ -11,9 +11,13 @@ export const LoginAction = createAsyncThunk("auth/login", async (object, { rejec
 		const response = await loginApi(object);
 		return response.data;
 	} catch (error) {
-		console.log(error)
-		const message = error?.response?.data?.error ||
-			error?.response?.data || { error: error.message }
-		return rejectWithValue({ error: message });
+
+		let message;
+		if (error?.response?.headers["content-type"]?.includes("application/json")) {
+			message = error?.response?.data?.error || error?.response?.data || { error: error.message };
+		} else {
+			message = { error: "An unexpected server error occurred. Please try again later." };
+		}
+		return rejectWithValue(message);
 	}
 });

@@ -10,9 +10,14 @@ export const AccountEmailActivateAction = createAsyncThunk("reg/accountEmailActi
         const response = await accountEmailActivateApi(key);
         return response.data;
     } catch (error) {
-        const message = error?.response?.data?.error ||
-            error?.response?.data || { error: error.message }
-        return rejectWithValue({ error: message });
+
+        let message;
+        if (error?.response?.headers["content-type"]?.includes("application/json")) {
+            message = error?.response?.data?.error || error?.response?.data || { error: error.message };
+        } else {
+            message = { error: "An unexpected server error occurred. Please try again later." };
+        }
+        return rejectWithValue(message);
     }
 
 })
