@@ -20,12 +20,11 @@ const LoginWithGoogle = () => {
                 const google_url = response.data.google_url;
                 if (google_url) window.location.href = google_url;
             }).catch((error) => {
-                let message = error?.response?.data || error.message;
-                setErrorMsg(message)
+                console.log(error.message)
+                setErrorMsg(error.message)
             });
     };
 
-    console.log(errorMsg)
 
     useEffect(() => {
         if (errorMsg) {
