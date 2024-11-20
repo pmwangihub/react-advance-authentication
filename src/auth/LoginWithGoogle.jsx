@@ -12,7 +12,8 @@ const LoginWithGoogle = () => {
     const { authLoader, authData, } = useSelector(state => state.AuthLoginReducer);
     let dispatch = useDispatch();
 
-    const handleLoginWithGoogle = () => {
+    const handleLoginWithGoogle = (event) => {
+        console.log(event)
         if (authData) return;
 
         return loginWithGoogleApi()
