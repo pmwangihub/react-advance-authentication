@@ -13,9 +13,8 @@ const LoginWithGoogle = () => {
     let dispatch = useDispatch();
 
     const handleLoginWithGoogle = (event) => {
-        console.log(event)
         if (authData) return;
-
+        console.log(event)
         return loginWithGoogleApi()
             .then((response) => {
                 const google_url = response.data.google_url;
