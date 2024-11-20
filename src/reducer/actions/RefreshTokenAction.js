@@ -9,6 +9,8 @@ export const RefreshTokenAction = createAsyncThunk("auth/refreshToken", async (_
         const response = await refreshTokenApi();
         return response.data;
     } catch (error) {
-        return rejectWithValue(error.response.data);
+        const message = error?.response?.data?.error ||
+            error?.response?.data || { error: error.message }
+        return rejectWithValue({ error: message });
     }
 });

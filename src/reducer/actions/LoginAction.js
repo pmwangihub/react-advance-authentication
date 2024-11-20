@@ -11,6 +11,8 @@ export const LoginAction = createAsyncThunk("auth/login", async (object, { rejec
 		const response = await loginApi(object);
 		return response.data;
 	} catch (error) {
-		return rejectWithValue(error.response.data);
+		const message = error?.response?.data?.error ||
+			error?.response?.data || { error: error.message }
+		return rejectWithValue({ error: message });
 	}
 });

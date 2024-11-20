@@ -8,7 +8,9 @@ export const LogoutAction = createAsyncThunk("auth/logout", async (_, { getState
 		const response = await logoutApi();
 		return response.data;
 	} catch (error) {
-		return rejectWithValue(error.response.data);
+		const message = error?.response?.data?.error ||
+			error?.response?.data || { error: error.message }
+		return rejectWithValue({ error: message });
 	}
 
 })

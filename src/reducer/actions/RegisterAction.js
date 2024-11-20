@@ -8,6 +8,8 @@ export const RegisterAction = createAsyncThunk("reg/register", async function (o
 		const response = await registerApi(object);
 		return response.data;
 	} catch (error) {
-		return rejectWithValue(error.response.data);
+		const message = error?.response?.data?.error ||
+			error?.response?.data || { error: error.message }
+		return rejectWithValue({ error: message });
 	}
 });

@@ -10,7 +10,9 @@ export const AccountEmailActivateAction = createAsyncThunk("reg/accountEmailActi
         const response = await accountEmailActivateApi(key);
         return response.data;
     } catch (error) {
-        return rejectWithValue(error.response.data);
+        const message = error?.response?.data?.error ||
+            error?.response?.data || { error: error.message }
+        return rejectWithValue({ error: message });
     }
 
 })
