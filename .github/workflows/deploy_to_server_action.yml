@@ -22,7 +22,9 @@ jobs:
         run: |
           ssh-keyscan -H 165.232.106.47 >> ~/.ssh/known_hosts
 
+
       - name: Deploy to Server
+      
         run: |
           ssh root@165.232.106.47 << 'EOF'
             cd /home/mwangi/django_cloud/frontend

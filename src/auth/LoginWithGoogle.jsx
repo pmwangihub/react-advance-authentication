@@ -14,13 +14,11 @@ const LoginWithGoogle = () => {
 
     const handleLoginWithGoogle = (event) => {
         if (authData) return;
-        console.log(event)
         return loginWithGoogleApi()
             .then((response) => {
                 const google_url = response.data.google_url;
                 if (google_url) window.location.href = google_url;
             }).catch((error) => {
-                console.log(error.message)
                 setErrorMsg(error.message)
             });
     };

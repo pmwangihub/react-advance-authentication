@@ -66,10 +66,7 @@ export const accountEmailActivateApi = (key) => http().get(`/accounts/activate/$
  * @params {} - None
  * @returns {Promise} - A promise that resolves with the server's response for Google login.
  */
-export const loginWithGoogleApi = () => {
-    console.log("Running google sign in")
-    return http().get(`/accounts/login-google/?client=react`)
-};
+export const loginWithGoogleApi = () => http().get(`/accounts/login-google/?client=react`);
 
 /**
  * @mwangihub - https://github.com/pmwangihub
