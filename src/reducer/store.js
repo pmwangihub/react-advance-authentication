@@ -7,5 +7,5 @@ export const store = configureStore({
 		AuthLoginReducer,
 		RegisterReducer
 	},
-	devTools: import.meta.env.DEV,
+	devTools: import.meta.env.PROD,
 })
