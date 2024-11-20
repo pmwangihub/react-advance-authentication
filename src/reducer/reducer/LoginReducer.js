@@ -18,7 +18,9 @@ export const authSlice = createSlice({
 	initialState,
 	reducers: {
 		setAuthLoginErrorAction: (state, action) => {
-			state.authError = action.payload.authError;
+			state.authLoader = false;
+			state.authData = null;
+			state.authError = action.payload;
 		},
 		localLogoutAction: (state) => {
 			state.authLoader = false;

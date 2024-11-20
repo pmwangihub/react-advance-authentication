@@ -1,13 +1,16 @@
 
-import Button from 'react-bootstrap/Button';
-import { useSelector } from 'react-redux';
-import { loginWithGoogleApi } from '../api';
-import React, { useState } from 'react';
 
+
+import Button from 'react-bootstrap/Button';
+import { useSelector, useDispatch } from 'react-redux';
+import { loginWithGoogleApi } from '../api';
+import React, { useState, useEffect } from 'react';
+import { setAuthLoginErrorAction } from '../reducer/reducer/LoginReducer';
 
 const LoginWithGoogle = () => {
     const [errorMsg, setErrorMsg] = useState(null);
     const { authLoader, authData, } = useSelector(state => state.AuthLoginReducer);
+    let dispatch = useDispatch();
 
     const handleLoginWithGoogle = () => {
         if (authData) return;
@@ -17,9 +20,18 @@ const LoginWithGoogle = () => {
                 const google_url = response.data.google_url;
                 if (google_url) window.location.href = google_url;
             }).catch((error) => {
-                setErrorMsg(error.message)
+                let message = error?.response?.data || error.message;
+                setErrorMsg(message)
             });
     };
+
+
+    useEffect(() => {
+        if (errorMsg) {
+            dispatch(setAuthLoginErrorAction({ authError: errorMsg }));
+            setErrorMsg(null);
+        }
+    }, [errorMsg, dispatch]);
 
     return (
 

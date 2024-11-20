@@ -30,7 +30,7 @@ const Login = () => {
         }
     }, [authData, authLoader, navigate, location]);
 
-    const onAlertClose = () => dispatch(setAuthLoginErrorAction({ payload: { authError: null } }))
+    const onAlertClose = () => dispatch(setAuthLoginErrorAction(null))
 
     const handleLogin = (event) => {
         event.preventDefault();
