@@ -1,7 +1,3 @@
-
-
-
-
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { loginApi } from "../../api";
 
@@ -11,7 +7,7 @@ export const LoginAction = createAsyncThunk("auth/login", async (object, { rejec
 		const response = await loginApi(object);
 		return response.data;
 	} catch (error) {
-
+		console.log(error)
 		let message;
 		if (error?.response?.headers["content-type"]?.includes("application/json")) {
 			message = error?.response?.data?.error || error?.response?.data || { error: error.message };
